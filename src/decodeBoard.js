@@ -1,5 +1,6 @@
 const decodeBoard = (string) => {
   string.replaceAll("-", "+").replaceAll("_", "/");
+  console.log(string)
   string = atob(string);
 
   let codes = [];
