@@ -6,6 +6,13 @@ const vestaboardCoordinates = {
     ],
     heights: [348, 410, 474, 536, 600, 661],
   },
+  cropped: {
+    widths: [
+      65, 99, 135, 168, 203, 237, 273, 307, 343, 378, 414, 448, 484, 519, 555,
+      591, 627, 661, 697, 732, 768, 804,
+    ],
+    heights: [67, 129, 193, 255, 319, 380],
+  },
 };
 
 module.exports = vestaboardCoordinates;
