@@ -11,11 +11,11 @@ const port = process.argv[2];
 
 let images;
 
-app.get("/:id", function (req, res) {
+const processPath = function (req, res) {
   console.log(`Serving ${req.params.id}`);
 
   res.contentType("png");
-  const input = decodeBoard(req.params.id);
+  const input = decodeBoard(req.params.id || '');
 
   Jimp.read("./images/vestaboard/template.png").then((template) => {
     input.forEach((row, rowIndex) => {
@@ -37,7 +37,9 @@ app.get("/:id", function (req, res) {
       }
     });
   });
-});
+};
+
+app.get("/:id", processPath);
 
 const startServer = async function () {
   const allImg = [];
