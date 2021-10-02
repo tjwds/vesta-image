@@ -1,7 +1,8 @@
 const Jimp = require("jimp");
 
 const splitflapValues = require("./src/splitflapValues.js");
-const { widths, heights } = require("./src/vestaboardCoordinates");
+const vestaboard = require("./src/vestaboardCoordinates");
+const { widths, heights } = vestaboard;
 const decodeBoard = require("./src/decodeBoard.js");
 
 // node index.js '[[67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65],[6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13],[67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65],[6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13],[67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65],[6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13,67,65,6,13]]'
