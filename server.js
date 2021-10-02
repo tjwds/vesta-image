@@ -12,31 +12,38 @@ const port = process.argv[2];
 let images;
 
 const processPath = function (req, res) {
-  console.log(`Serving ${req.params.id}`);
+  try {
+    console.log(`Serving ${req.params.id}`);
 
-  res.contentType("png");
-  const input = decodeBoard(req.params.id || '');
+    const input = decodeBoard(req.params.id || '');
 
-  Jimp.read("./images/vestaboard/template.png").then((template) => {
-    input.forEach((row, rowIndex) => {
-      const height = heights[rowIndex];
+    Jimp.read("./images/vestaboard/template.png").then((template) => {
+      input.forEach((row, rowIndex) => {
+        const height = heights[rowIndex];
 
-      row.forEach((char, index) => {
-        const entry = images[char];
-        if (char > 0) {
-          template.blit(entry, widths[index], height);
+        row.forEach((char, index) => {
+          const entry = images[char];
+          if (char > 0) {
+            template.blit(entry, widths[index], height);
+          }
+        });
+      });
+
+      template.getBuffer(Jimp.MIME_PNG, (error, buffer) => {
+        if (error) {
+          console.log(error);
+          throw new Error(error);
+        } else {
+          res.contentType("png");
+          res.send(buffer);
         }
       });
     });
-
-    template.getBuffer(Jimp.MIME_PNG, (error, buffer) => {
-      if (error) {
-        console.log(error);
-      } else {
-        res.send(buffer);
-      }
-    });
-  });
+  } catch (err) {
+    console.log(err);
+    res.contentType("text/plain");
+    res.send('Sorry, something has gone wrong.  Please alert your nearest plumber.')
+  }
 };
 
 app.get("/:id", processPath);
